@@ -81,7 +81,7 @@ class TaskFourListView(APIView):
         serializer2 = SeriesTypeSerializer(series_type)
         
         # serielizers = [serializer1.data, serializer2.data]
-        print(serializer1, serializer2)
+        print("serielizers====>",serializer1, serializer2)
         return Response("hello")
     
 """
@@ -123,4 +123,7 @@ class TaskFiveListView(APIView):
         
         # serielizers = [serializer1.data, serializer2.data]
         
-        return Response([{"serieses_count": len(query1), "series":arr1},{"serieses_count": len(query2), "series":arr1},{"serieses_count": len(query3), "series":arr1}])
+        return Response([{"serieses_count": len(query1), "series":arr1},
+                         {"serieses_count": len(query2), "series":arr2},
+                         {"serieses_count": len(query3), "series":arr3}
+                         ])
