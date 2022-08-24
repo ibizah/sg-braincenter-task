@@ -13,7 +13,6 @@ from .serializers import SeriesTypeSerializer, SeriesSerializer, TaskFiveSeriali
 
 """
 2. All the models should have a Seriealizer and ViewSet based functiionalities
-
 """
 class SeriesListView(APIView):
 
@@ -24,8 +23,7 @@ class SeriesListView(APIView):
         return Response(serializer.data)
     
     """
-    3a). POST method, with parameters of (Name, Series_type) 
-         
+    3a). POST method, with parameters of (Name, Series_type)   
     """
     def post(self, request ):
         answer, created = Series.objects.update_or_create(
@@ -43,7 +41,6 @@ class SeriesListView(APIView):
 """
 4. Write a REST call for allget the following details:
 	a). Series.id, Series.Name, Series_type.Name, Series_type.Mnemonic
- 
 """
 class SeriesDetailView(APIView):
 
@@ -59,12 +56,9 @@ class SeriesDetailView(APIView):
         return Response(serializer.data)
     
 """
-
 4. Write a REST call for allget the following details:
 	a). Series.id, Series.Name, Series_type.Name, Series_type.Mnemonic
- 
 """
-
 class TaskFourListView(APIView):
     
     def get_object(self, pk):
@@ -74,15 +68,17 @@ class TaskFourListView(APIView):
             raise Http404
 
     def get(self, request):
-        series = Series.objects.all()
-        series_type = SeriesType.objects.all()
+        series = Series.objects.all().values()
+        series_type = SeriesType.objects.all().values()
         
-        serializer1 = SeriesSerializer(series)
-        serializer2 = SeriesTypeSerializer(series_type)
-        
+        pubs = Series.objects.select_related('series_type')
+        print("pubs  ====>", pubs)
+        series = serializers.serialize("json", pubs)
+        series_type = serializers.serialize("json", SeriesType.objects.all(), fields = ("name", "mnemonic"))
         # serielizers = [serializer1.data, serializer2.data]
-        print("serielizers====>",serializer1, serializer2)
-        return Response("hello")
+        print("series  ====>", series)
+        print("series_type  ====>", series_type)
+        return Response(series)
     
 """
 5. Write a REST call for get the following details:
@@ -117,12 +113,8 @@ class TaskFiveListView(APIView):
         q1 = serializers.serialize("json", query1)
         q2 = serializers.serialize("json", query2)
         q3 = serializers.serialize("json", query3)
-        print("q1===>", type(q1))
-        
-        serializer = TaskFiveSerializer(query1)
-        
-        # serielizers = [serializer1.data, serializer2.data]
-        
+       
+       
         return Response([{"serieses_count": len(query1), "series":arr1},
                          {"serieses_count": len(query2), "series":arr2},
                          {"serieses_count": len(query3), "series":arr3}

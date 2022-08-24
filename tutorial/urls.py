@@ -20,9 +20,11 @@ from django.urls import include, path
 from rest_framework import routers
 from braincenter.views import SeriesDetailView, SeriesListView, TaskFourListView, TaskFiveListView
 
-router = routers.DefaultRouter()
-# router.register(r'series', SeriesListView )
-# router.register(r'details', SeriesDetailView )
+# router = routers.DefaultRouter()
+# router.register(r'series', SeriesListView, basename='Series' )
+# router.register(r'details', SeriesDetailView, basename='Details' )
+# router.register(r'taskiv', TaskFourListView )
+# router.register(r'taskv', SeriesDetailView )
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
