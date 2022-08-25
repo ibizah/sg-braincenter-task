@@ -53,9 +53,9 @@ class SeriesSet(models.Model):
 
 class GetSeriesDetailsModel(models.Model):
     series_id = models.IntegerField()
-    series_name = models.CharField()
-    series_type_name = models.CharField()
-    series_type_mnemonic = models.CharField()
+    series_name = models.CharField(max_length=255)
+    series_type_name = models.CharField(max_length=255)
+    series_type_mnemonic = models.CharField(max_length=255)
   
     def __str__(self):
         return self.name

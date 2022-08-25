@@ -9,14 +9,14 @@ from rest_framework.views import APIView
 from rest_framework.renderers import JSONRenderer
 from django.core import serializers
 from .models import Series, SeriesSet, SeriesType
-from .serializers import SeriesTypeSerializer, SeriesSerializer, TaskFiveSerializer
+from .serializers import SeriesTypeSerializer, SeriesSerializer
 
 """
 2. All the models should have a Seriealizer and ViewSet based functiionalities
 """
 
 """
-i)ViewSet based functiionalities
+i) ViewSet based functiionalities
 """
 
 
