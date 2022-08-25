@@ -18,7 +18,7 @@ from django.urls import path
 
 from django.urls import include, path
 from rest_framework import routers
-from braincenter.views import SeriesDetailView, SeriesListView, TaskFourListView, TaskFiveListView
+from braincenter.views import SeriesDetailView, CreateOrUpdateSeriesView, GetSeriesDetailsView, GetSeriesCount
 
 # router = routers.DefaultRouter()
 # router.register(r'series', SeriesListView, basename='Series' )
@@ -28,13 +28,14 @@ from braincenter.views import SeriesDetailView, SeriesListView, TaskFourListView
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
+
+
 urlpatterns = [
-    # path('', include(router.urls)),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('series/', SeriesListView.as_view()),
+    path('series/', CreateOrUpdateSeriesView().as_view()),
     path('series/<int:pk>/', SeriesDetailView.as_view()),
-    path('series/taskiv/', TaskFourListView.as_view()),
-    path('series/taskv/', TaskFiveListView.as_view()),
+    path('series/taskiv/', GetSeriesDetailsView.as_view()),
+    path('series/taskv/', GetSeriesCount().as_view()),
 ]
 
