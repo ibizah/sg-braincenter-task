@@ -17,6 +17,8 @@ Django app - Requirements:
 			- Series => Forign key refererring from Series.id
 			
 2. All the models should have a Seriealizer and ViewSet based functiionalities
+	SOLUTION PATH:
+	braincenter\views.py | line 68
 
 3. REST call for Create or Update functionality to "Series" table:
 	a). POST method, with parameters of (Name, Series_type) 
@@ -25,6 +27,9 @@ Django app - Requirements:
 
 4. Write a REST call for get the following details:
 	a). Series.id, Series.Name, Series_type.Name, Series_type.Mnemonic
+	
+	SOLUTION PATH:
+	braincenter\views.py | line 68
 
 5. Write a REST call for get the following details:
 	a). Count of unique Series_type from Series table, and list of series names for each Series_set
