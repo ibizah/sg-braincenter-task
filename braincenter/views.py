@@ -1,4 +1,5 @@
 from email.policy import default
+from django.http import HttpResponse, JsonResponse
 from urllib import request
 from django.shortcuts import render
 from rest_framework import status
@@ -83,17 +84,13 @@ class GetSeriesDetailsView(APIView):
             raise Http404
 
     def get(self, request):
-        series = Series.objects.all().values()
-        series_type = SeriesType.objects.all().values()
-
-        pubs = Series.objects.select_related('series_type')
-        print("pubs  ====>", pubs.values())
-        series = serializers.serialize("json", pubs)
-        series_type = serializers.serialize(
-            "json", SeriesType.objects.all(), fields=("name", "mnemonic"))
-        print("series  ====>", series)
-        print("series_type  ====>", series_type)
-        return Response(series)
+        series = Series.objects.all()
+        series_type = SeriesType.objects.all()
+        series_serielizer = SeriesSerializer(series, many=True)
+        series_type_serielizer = SeriesTypeSerializer(series_type, many=True)
+        print(series_serielizer,series_type_serielizer )
+        return Response({"data1": series_serielizer.data, "data2": series_type_serielizer.data})
+        
 
 
 """
@@ -103,7 +100,7 @@ class GetSeriesDetailsView(APIView):
 """
 
 
-class GetSeriesCount(APIView):
+class GetSeriesCountView(APIView):
 
     def get_object(self, pk):
         try:

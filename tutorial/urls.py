@@ -18,7 +18,7 @@ from django.urls import path
 
 from django.urls import include, path
 from rest_framework import routers
-from braincenter.views import SeriesDetailView, CreateOrUpdateSeriesView, GetSeriesDetailsView, GetSeriesCount
+from braincenter.views import SeriesDetailView, CreateOrUpdateSeriesView, GetSeriesDetailsView, GetSeriesCountView
 
 # router = routers.DefaultRouter()
 # router.register(r'series', SeriesListView, basename='Series' )
@@ -33,9 +33,9 @@ from braincenter.views import SeriesDetailView, CreateOrUpdateSeriesView, GetSer
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('series/', CreateOrUpdateSeriesView().as_view()),
+    path('series/', CreateOrUpdateSeriesView.as_view()),
     path('series/<int:pk>/', SeriesDetailView.as_view()),
     path('series/taskiv/', GetSeriesDetailsView.as_view()),
-    path('series/taskv/', GetSeriesCount().as_view()),
+    path('series/taskv/', GetSeriesCountView.as_view()),
 ]
 
